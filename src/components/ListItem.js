@@ -2,7 +2,6 @@ import React from 'react';
 
 const ListItem = ({ todo, deleteItem }) => {
     const handleDeleteClick = (event) => {
-        console.log(event);
         event.preventDefault();
         const confirmDeletion = window.confirm(`Do you really want to delete ${todo.content}?`);
         if (confirmDeletion) {
@@ -11,7 +10,7 @@ const ListItem = ({ todo, deleteItem }) => {
     }
     
     return (
-        <li key={todo.id} className="todo-list-item">
+        <li className="todo-list-item">
             <div className="list-text-content">
             {todo.content} 
             </div>

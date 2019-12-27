@@ -33,8 +33,7 @@ ul {
 }
 
 .todo-list {
-    margin: auto;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
     width: 30%;
     list-style: none;
     text-align: left;
@@ -95,4 +94,8 @@ ul {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+#date {
+    margin-left: 1rem;
 }

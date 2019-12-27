@@ -2,18 +2,24 @@
   "todos": [
     {
       "id": 1,
+      "content": "Begin app",
+      "important": false,
+      "date": "\"2019-12-26T02:33:24.785Z\""
+    },
+    {
+      "id": 2,
       "content": "Play golf",
       "important": false,
       "date": "\"2019-12-27T02:33:24.785Z\""
     },
     {
-      "id": 2,
+      "id": 3,
       "content": "Buy groceries",
       "important": false,
       "date": "\"2019-12-27T02:33:40.754Z\""
     },
     {
-      "id": 3,
+      "id": 4,
       "content": "Finish app",
       "important": false,
       "date": "\"2019-12-27T02:33:52.762Z\""
