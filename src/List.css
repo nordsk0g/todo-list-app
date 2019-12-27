@@ -62,7 +62,7 @@ ul {
     background-color: var(--primary-color);
     border: none;
     padding: 0.6rem 0.8rem;
-    margin-left: 2rem;
+    margin-left: 1rem;
 }
 
 .btn:hover {
@@ -73,11 +73,12 @@ ul {
 }
 
 .todo-form {
-    
+    width: 30%;
+    margin: auto;
 }
 
 .new-task-input {
-    width: 30%;
+    width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid var(--primary-color);
@@ -88,8 +89,8 @@ ul {
 }
 
 .input-and-button {
-    margin-top: 1rem;
-    padding: 1rem;
+    width: 100%;
+    margin-top: 1.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;

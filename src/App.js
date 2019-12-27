@@ -7,12 +7,33 @@ import todoService from './services/todos';
 function App() {
   const [list, setList] = useState([]);
   const [newTodo, setNewTodo] = useState('');
+  const [organisedDateList, setOrganisedDateList] = useState({});
 
   useEffect(() => {
     todoService
       .getAll()
       .then(response => setList(response))
   }, [])
+
+  useEffect(() => {
+    let newList = {}
+    list.map(item => {
+            let parsedAndFormattedDate = new Date(JSON.parse(item.date)).toLocaleDateString();
+            if (newList.hasOwnProperty(parsedAndFormattedDate)) {
+                newList = {
+                    ...newList,
+                    [parsedAndFormattedDate]: [...newList[parsedAndFormattedDate], { content: item.content, id: item.id }]
+                }
+            } else {
+               newList = {
+                    ...newList,
+                    [parsedAndFormattedDate]: [{ content: item.content, id: item.id }],
+                }
+            }
+        });
+    
+    setOrganisedDateList(newList)
+}, [list])
 
   const addItem = (event) => {
     event.preventDefault();
@@ -46,12 +67,10 @@ function App() {
       .catch(error => console.error(error));
   }
 
-  
-
   return (
     <div className="container">
       <h1>To-do List</h1>
-      <List list={list} deleteItem={deleteItem} />
+      <List list={list} deleteItem={deleteItem} organisedDateList={organisedDateList} initialDate={Object.keys(organisedDateList)[0]} />
       <form className="todo-form" onSubmit={addItem}>
           What do you want to do today?
           <div className="input-and-button">
