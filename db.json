@@ -15,7 +15,7 @@
     {
       "id": 3,
       "content": "Buy groceries",
-      "completed": false,
+      "completed": true,
       "date": "\"2019-12-27T02:33:40.754Z\""
     },
     {

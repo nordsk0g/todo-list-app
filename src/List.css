@@ -1,121 +1,134 @@
 :root {
-    --background-color: #f8f8f0;
-    --primary-color: #8470ff;
-    --secondary-color: #1e90ff;
-    --tertiary-color: #ff1493;
-    --quaternary-color: #bf3eff;
+  --background-color: #f8f8f0;
+  --primary-color: #8470ff;
+  --secondary-color: #1e90ff;
+  --tertiary-color: #ff1493;
+  --quaternary-color: #bf3eff;
 }
 
 * {
-    background-color: var(--background-color);
-    font-family: 'Roboto Mono', monospace;
-    color: var(--primary-color);
-    box-sizing: border-box;
+  background-color: var(--background-color);
+  font-family: "Roboto Mono", monospace;
+  color: var(--primary-color);
+  box-sizing: border-box;
 }
 
 ul {
-    padding: 0;
+  padding: 0;
 }
 
+/* General */
+
 .container {
-    margin: auto;
-    text-align: center;
+  margin: auto;
+  text-align: center;
+}
+
+.hide-item {
+  display: none;
 }
 
 #complete-svg {
-    margin: 0 1rem 0 2rem;
+  margin: 0 1rem 0 2rem;
 }
 
 #complete-svg:hover {
-    cursor: pointer;
-    fill: #7eff3e;
-    stroke: var(--background-color);
+  cursor: pointer;
+  fill: #7eff3e;
+  stroke: var(--background-color);
 }
 
 #delete-svg {
-    margin: 0 2rem 0 1rem;
+  margin: 0 2rem 0 1rem;
 }
 
 #delete-svg:hover {
-    cursor: pointer;
-    fill: var(--tertiary-color);
-    stroke: var(--background-color);
+  cursor: pointer;
+  fill: var(--tertiary-color);
+  stroke: var(--background-color);
+}
+
+#warning-svg {
+  margin-left: 0.5rem;
+  stroke: #ff8470;
 }
 
 .icons {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .todo-list {
-    margin: 1rem auto;
-    width: 30%;
-    list-style: none;
-    text-align: left;
-    border: 1px solid var(--primary-color);
+  margin: 1rem auto;
+  width: 30%;
+  list-style: none;
+  text-align: left;
+  border: 1px solid var(--primary-color);
 }
 
 .completed-item {
-    text-decoration: var(--tertiary-color) solid line-through;
+  text-decoration: var(--tertiary-color) solid line-through;
 }
 
 .todo-list-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px dotted var(--primary-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dotted var(--primary-color);
 }
 
 .todo-list-item:nth-last-child(1) {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .list-text-content {
-    font-size: 1.2rem;
-    margin: 0.5rem 0 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0.5rem 2rem;
 }
 
 .btn {
-    color: var(--background-color);
-    background-color: var(--primary-color);
-    border: none;
-    padding: 0.6rem 0.8rem;
-    margin-left: 1rem;
+  color: var(--background-color);
+  background-color: var(--primary-color);
+  border: none;
+  padding: 0.6rem 0.8rem;
+  margin-left: 1rem;
 }
 
 .btn:hover {
-    cursor: pointer;
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+  cursor: pointer;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 .todo-form {
-    width: 30%;
-    margin: auto;
+  width: 30%;
+  margin: auto;
 }
 
 .new-task-input {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid var(--primary-color);
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--primary-color);
 }
 
 .new-task-input:focus {
-    border: 1px solid var(--secondary-color);
+  border: 1px solid var(--secondary-color);
 }
 
 .input-and-button {
-    width: 100%;
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 #date {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }

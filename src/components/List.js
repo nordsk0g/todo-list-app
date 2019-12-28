@@ -44,6 +44,7 @@ const List = ({
               <ListItem
                 key={item.id}
                 todo={item}
+                date={date}
                 updateItem={() => updateItem(item.id)}
                 deleteItem={() => deleteItem(item.id)}
               />
