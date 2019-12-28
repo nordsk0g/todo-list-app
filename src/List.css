@@ -22,8 +22,18 @@ ul {
     text-align: center;
 }
 
+#complete-svg {
+    margin: 0 1rem 0 2rem;
+}
+
+#complete-svg:hover {
+    cursor: pointer;
+    fill: #7eff3e;
+    stroke: var(--background-color);
+}
+
 #delete-svg {
-    margin: 0 2rem 0 2rem;
+    margin: 0 2rem 0 1rem;
 }
 
 #delete-svg:hover {
@@ -32,12 +42,21 @@ ul {
     stroke: var(--background-color);
 }
 
+.icons {
+    display: flex;
+    align-items: center;
+}
+
 .todo-list {
     margin: 1rem auto;
     width: 30%;
     list-style: none;
     text-align: left;
     border: 1px solid var(--primary-color);
+}
+
+.completed-item {
+    text-decoration: var(--tertiary-color) solid line-through;
 }
 
 .todo-list-item {

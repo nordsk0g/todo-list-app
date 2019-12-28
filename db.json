@@ -3,26 +3,32 @@
     {
       "id": 1,
       "content": "Begin app",
-      "important": false,
+      "completed": false,
       "date": "\"2019-12-26T02:33:24.785Z\""
     },
     {
       "id": 2,
       "content": "Play golf",
-      "important": false,
+      "completed": false,
       "date": "\"2019-12-27T02:33:24.785Z\""
     },
     {
       "id": 3,
       "content": "Buy groceries",
-      "important": false,
+      "completed": false,
       "date": "\"2019-12-27T02:33:40.754Z\""
     },
     {
       "id": 4,
       "content": "Finish app",
-      "important": false,
+      "completed": false,
       "date": "\"2019-12-27T02:33:52.762Z\""
+    },
+    {
+      "id": 5,
+      "content": "Add completion functionality",
+      "completed": false,
+      "date": "\"2019-12-28T02:23:05.978Z\""
     }
   ]
 }

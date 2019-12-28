@@ -1,60 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import List from './components/List';
-import Form from './components/Form';
-import todoService from './services/todos';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import List from "./components/List";
+import Form from "./components/Form";
+import todoService from "./services/todos";
 
 function App() {
   const [list, setList] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
+  const [newTodo, setNewTodo] = useState("");
   const [organisedDateList, setOrganisedDateList] = useState({});
 
   useEffect(() => {
-    todoService
-      .getAll()
-      .then(response => setList(response))
-  }, [])
+    todoService.getAll().then(response => setList(response.reverse()));
+  }, []);
 
   useEffect(() => {
-    let newList = {}
+    let newList = {};
     list.map(item => {
-            let parsedAndFormattedDate = new Date(JSON.parse(item.date)).toLocaleDateString();
-            if (newList.hasOwnProperty(parsedAndFormattedDate)) {
-                newList = {
-                    ...newList,
-                    [parsedAndFormattedDate]: [...newList[parsedAndFormattedDate], { content: item.content, id: item.id }]
-                }
-            } else {
-               newList = {
-                    ...newList,
-                    [parsedAndFormattedDate]: [{ content: item.content, id: item.id }],
-                }
-            }
-        });
-    
-    setOrganisedDateList(newList)
-}, [list])
+      let parsedAndFormattedDate = new Date(
+        JSON.parse(item.date)
+      ).toLocaleDateString();
+      if (newList.hasOwnProperty(parsedAndFormattedDate)) {
+        newList = {
+          ...newList,
+          [parsedAndFormattedDate]: [
+            ...newList[parsedAndFormattedDate],
+            { content: item.content, id: item.id, completed: item.completed }
+          ]
+        };
+      } else {
+        newList = {
+          ...newList,
+          [parsedAndFormattedDate]: [
+            { content: item.content, id: item.id, completed: item.completed }
+          ]
+        };
+      }
+    });
 
-  const addItem = (event) => {
+    setOrganisedDateList(newList);
+  }, [list]);
+
+  const addItem = event => {
     event.preventDefault();
     const todoObject = {
       id: list.length + 1,
       content: newTodo,
-      important: false,
+      completed: false,
       date: JSON.stringify(new Date())
-    }
+    };
+
+    todoService.create(todoObject).then(response => {
+      setList(list.concat(response));
+      setNewTodo("");
+    });
+  };
+
+  const updateItem = id => {
+    const todo = list.find(t => t.id === id);
+    const updatedTodo = { ...todo, completed: !todo.completed };
 
     todoService
-      .create(todoObject)
-      .then(response => {
-        setList(list.concat(response))
-        setNewTodo('');
+      .update(id, updatedTodo)
+      .then(returnedTodo => {
+        setList(list.map(item => (item.id !== id ? item : returnedTodo)));
       })
-  }
-  
-  const handleItemChange = (e) => {
+      .catch(error => console.error(error));
+  };
+
+  const handleItemChange = e => {
     setNewTodo(e.target.value);
-  }
+  };
 
   const deleteItem = id => {
     const todo = list.find(t => t.id === id);
@@ -62,21 +77,33 @@ function App() {
     todoService
       .remove(id, todo)
       .then(() => {
-        setList(list.filter(item => item.id !== id))
+        setList(list.filter(item => item.id !== id));
       })
       .catch(error => console.error(error));
-  }
+  };
 
   return (
     <div className="container">
       <h1>To-do List</h1>
-      <List list={list} deleteItem={deleteItem} organisedDateList={organisedDateList} initialDate={Object.keys(organisedDateList)[0]} />
+      <List
+        list={list}
+        updateItem={updateItem}
+        deleteItem={deleteItem}
+        organisedDateList={organisedDateList}
+        initialDate={Object.keys(organisedDateList)[0]}
+      />
       <form className="todo-form" onSubmit={addItem}>
-          What do you want to do today?
-          <div className="input-and-button">
-            <input className="new-task-input" value={newTodo} onChange={handleItemChange} />
-            <button className="btn" type="submit">Submit</button>
-          </div>
+        What do you want to do today?
+        <div className="input-and-button">
+          <input
+            className="new-task-input"
+            value={newTodo}
+            onChange={handleItemChange}
+          />
+          <button className="btn" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
