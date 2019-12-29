@@ -45,7 +45,7 @@ function App() {
     });
 
     setOrganisedDateList(newList);
-  }, [list]);
+  }, [list, date]);
 
   const addItem = event => {
     event.preventDefault();
