@@ -29,7 +29,7 @@ ul {
 }
 
 #complete-svg {
-  margin: 0 1rem 0 2rem;
+  margin-left: 1rem;
 }
 
 #complete-svg:hover {
@@ -39,7 +39,7 @@ ul {
 }
 
 #delete-svg {
-  margin: 0 2rem 0 1rem;
+  margin-left: 1rem;
 }
 
 #delete-svg:hover {
@@ -56,6 +56,7 @@ ul {
 .icons {
   display: flex;
   align-items: center;
+  margin-right: 1rem;
 }
 
 .todo-list {
@@ -139,4 +140,21 @@ ul {
 
 #select-date:focus {
   border-color: var(--secondary-color);
+}
+
+@media (max-width: 1080px) {
+  .todo-list {
+    width: 90%;
+    overflow: auto;
+  }
+
+  .list-text-content {
+    font-size: 1rem;
+    margin: 0.5rem 1rem;
+  }
+
+  .todo-form {
+    width: 90%;
+    margin: auto;
+  }
 }

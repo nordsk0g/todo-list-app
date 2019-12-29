@@ -26,6 +26,8 @@ const ListItem = ({ todo, date, updateItem, deleteItem }) => {
         }
       >
         {todo.content}
+      </div>
+      <div className="icons">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -47,8 +49,6 @@ const ListItem = ({ todo, date, updateItem, deleteItem }) => {
           <line x1="12" y1="8" x2="12" y2="12"></line>
           <line x1="12" y1="16" x2="12" y2="16"></line>
         </svg>
-      </div>
-      <div className="icons">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
