@@ -8,6 +8,9 @@ function App() {
   const [list, setList] = useState([]);
   const [newTodo, setNewTodo] = useState("");
   const [organisedDateList, setOrganisedDateList] = useState({});
+  const [currentDate, setCurrentDate] = useState(
+    new Date().toLocaleDateString()
+  );
 
   useEffect(() => {
     todoService.getAll().then(response => setList(response.reverse()));
@@ -15,7 +18,7 @@ function App() {
 
   useEffect(() => {
     let newList = {};
-    list.map(item => {
+    list.forEach(item => {
       let parsedAndFormattedDate = new Date(
         JSON.parse(item.date)
       ).toLocaleDateString();
@@ -82,6 +85,10 @@ function App() {
       .catch(error => console.error(error));
   };
 
+  // const hideForm = date => date === new Date().toLocaleDateString();
+
+  // console.log(Object.keys(organisedDateList)[0]);
+
   return (
     <div className="container">
       <h1>To-do List</h1>
@@ -91,8 +98,16 @@ function App() {
         deleteItem={deleteItem}
         organisedDateList={organisedDateList}
         initialDate={Object.keys(organisedDateList)[0]}
+        setCurrentDate={setCurrentDate}
       />
-      <form className="todo-form" onSubmit={addItem}>
+      <form
+        className={
+          currentDate === new Date().toLocaleDateString()
+            ? "todo-form"
+            : "hide-item"
+        }
+        onSubmit={addItem}
+      >
         What do you want to do today?
         <div className="input-and-button">
           <input

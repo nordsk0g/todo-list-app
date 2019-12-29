@@ -7,7 +7,8 @@ const List = ({
   updateItem,
   deleteItem,
   organisedDateList,
-  initialDate
+  initialDate,
+  setCurrentDate
 }) => {
   const [date, setDate] = useState();
   const [daysTodos, setDaysTodos] = useState(null);
@@ -25,9 +26,12 @@ const List = ({
       <label className="date-label" htmlFor="date">
         Date
         <select
-          id="date"
+          id="select-date"
           value={date}
-          onChange={e => setDate(e.target.value)}
+          onChange={e => {
+            setDate(e.target.value);
+            setCurrentDate(e.target.value);
+          }}
           onBlur={e => setDate(e.target.value)}
         >
           {Object.keys(organisedDateList).map(date => (
