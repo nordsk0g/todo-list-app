@@ -10,9 +10,9 @@ function App() {
   const [newTodo, setNewTodo] = useState("");
   const [organisedDateList, setOrganisedDateList] = useState({});
 
-  useEffect(() => {
-    setDate(Object.keys(organisedDateList)[0]);
-  }, [organisedDateList]);
+  // useEffect(() => {
+  //   setDate(Object.keys(organisedDateList)[0]);
+  // }, [organisedDateList]);
 
   useEffect(() => {
     todoService.getAll().then(response => setList(response.reverse()));

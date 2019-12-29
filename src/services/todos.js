@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://shrouded-earth-32064.herokuapp.com/";
+const baseUrl = "https://shrouded-earth-32064.herokuapp.com/todos";
 
 const getAll = async () => {
   const request = await axios.get(baseUrl);
