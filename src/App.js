@@ -6,18 +6,22 @@ import todoService from "./services/todos";
 
 function App() {
   const [list, setList] = useState([]);
+  const [date, setDate] = useState(new Date().toLocaleDateString());
   const [newTodo, setNewTodo] = useState("");
   const [organisedDateList, setOrganisedDateList] = useState({});
-  const [currentDate, setCurrentDate] = useState(
-    new Date().toLocaleDateString()
-  );
+
+  useEffect(() => {
+    setDate(Object.keys(organisedDateList)[0]);
+  }, [organisedDateList]);
 
   useEffect(() => {
     todoService.getAll().then(response => setList(response.reverse()));
   }, []);
 
   useEffect(() => {
-    let newList = {};
+    let newList = {
+      [date]: []
+    };
     list.forEach(item => {
       let parsedAndFormattedDate = new Date(
         JSON.parse(item.date)
@@ -55,6 +59,7 @@ function App() {
     todoService.create(todoObject).then(response => {
       setList(list.concat(response));
       setNewTodo("");
+      setDate(new Date().toLocaleDateString());
     });
   };
 
@@ -85,10 +90,6 @@ function App() {
       .catch(error => console.error(error));
   };
 
-  // const hideForm = date => date === new Date().toLocaleDateString();
-
-  // console.log(Object.keys(organisedDateList)[0]);
-
   return (
     <div className="container">
       <h1>To-do List</h1>
@@ -97,14 +98,13 @@ function App() {
         updateItem={updateItem}
         deleteItem={deleteItem}
         organisedDateList={organisedDateList}
-        initialDate={Object.keys(organisedDateList)[0]}
-        setCurrentDate={setCurrentDate}
+        // initialDate={Object.keys(organisedDateList)[0]}
+        date={date}
+        setDate={setDate}
       />
       <form
         className={
-          currentDate === new Date().toLocaleDateString()
-            ? "todo-form"
-            : "hide-item"
+          date === new Date().toLocaleDateString() ? "todo-form" : "todo-form"
         }
         onSubmit={addItem}
       >

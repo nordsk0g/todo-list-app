@@ -8,14 +8,15 @@ const List = ({
   deleteItem,
   organisedDateList,
   initialDate,
-  setCurrentDate
+  date,
+  setDate
 }) => {
-  const [date, setDate] = useState();
+  // const [date, setDate] = useState();
   const [daysTodos, setDaysTodos] = useState(null);
 
-  useEffect(() => {
-    setDate(initialDate);
-  }, [initialDate]);
+  // useEffect(() => {
+  //   setDate(initialDate);
+  // }, [initialDate]);
 
   useEffect(() => {
     setDaysTodos(organisedDateList[date]);
@@ -30,7 +31,6 @@ const List = ({
           value={date}
           onChange={e => {
             setDate(e.target.value);
-            setCurrentDate(e.target.value);
           }}
           onBlur={e => setDate(e.target.value)}
         >
