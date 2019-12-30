@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import "./App.css";
 import List from "./components/List";
-import Form from "./components/Form";
-import todoService from "./services/todos";
+import { todoReducer } from "./reducers/todoReducer";
 
 function App() {
-  const [list, setList] = useState([]);
+  const [list, dispatch] = useReducer(todoReducer, [], () => {
+    const localData = localStorage.getItem("todos");
+    return localData ? JSON.parse(localData) : [];
+  });
   const [date, setDate] = useState(new Date().toLocaleDateString());
   const [newTodo, setNewTodo] = useState("");
   const [organisedDateList, setOrganisedDateList] = useState({});
 
-  // useEffect(() => {
-  //   setDate(Object.keys(organisedDateList)[0]);
-  // }, [organisedDateList]);
-
   useEffect(() => {
-    todoService.getAll().then(response => setList(response.reverse()));
-  }, []);
+    localStorage.setItem("todos", JSON.stringify(list));
+  }, [list]);
 
   useEffect(() => {
     let newList = {
@@ -48,18 +46,12 @@ function App() {
   }, [list, date]);
 
   const addItem = event => {
-    event.preventDefault();
-    const todoObject = {
-      id: list.length + 1,
-      content: newTodo,
-      completed: false,
-      date: JSON.stringify(new Date())
-    };
-
-    todoService.create(todoObject).then(response => {
-      setList(list.concat(response));
-      setNewTodo("");
-      setDate(new Date().toLocaleDateString());
+    dispatch({
+      type: "ADD_TODO",
+      todo: {
+        content: newTodo,
+        completed: false
+      }
     });
   };
 
@@ -67,12 +59,7 @@ function App() {
     const todo = list.find(t => t.id === id);
     const updatedTodo = { ...todo, completed: !todo.completed };
 
-    todoService
-      .update(id, updatedTodo)
-      .then(returnedTodo => {
-        setList(list.map(item => (item.id !== id ? item : returnedTodo)));
-      })
-      .catch(error => console.error(error));
+    dispatch({ type: "UPDATE_TODO", id: id, updatedItem: updatedTodo });
   };
 
   const handleItemChange = e => {
@@ -80,14 +67,7 @@ function App() {
   };
 
   const deleteItem = id => {
-    const todo = list.find(t => t.id === id);
-
-    todoService
-      .remove(id, todo)
-      .then(() => {
-        setList(list.filter(item => item.id !== id));
-      })
-      .catch(error => console.error(error));
+    dispatch({ type: "REMOVE_TODO", id: id });
   };
 
   return (
